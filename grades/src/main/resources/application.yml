@@ -1,0 +1,35 @@
+server:
+  port: 0
+  error:
+    include-message: always
+
+#Configuracion de spring
+spring:
+  application:
+    name: grades-ms
+  #Configuracion de migracion
+  flyway:
+    enabled: true
+    baselineVersion: 1
+    locations:
+      classpath: db/migration
+    sqlMigrationSuffixes: .sql
+    baselineOnMigrate: true
+    sqlMigrationPrefix: V
+    schemas: public
+  #Conexion a la base de datos
+  datasource:
+    url: jdbc:postgresql://hattie.db.elephantsql.com:5432/rbeqskaz?socketTimeout=3
+    username: rbeqskaz
+    password: RyeKQZG2oG0ZvFPkDG2xbOYdpHiixlDn
+    driverClassName: org.postgresql.Driver
+
+#Conexion para registro de esta API en eureka
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${random.uuid}
+
+external:
+  student:
+    api:
+      base-url: http://localhost:8080/
